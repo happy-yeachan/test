@@ -33,14 +33,14 @@ jobs:
     steps:
       - name: Prepare SSH Key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" | base64 --decode > key.pem
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > key.pem
           chmod 600 key.pem
 
       - name: SSH into EC2 and pull/run container
         run: |
           # 환경변수 준비 (secrets에 해당 값들을 넣어두어야 값이 똑바로 읽어와진다!)
-          HOST=${{ secrets.EC2_HOST }}
-          USER=${{ secrets.EC2_USER }}
+          HOST=${{ secrets.HOST }}
+          USER=${{ secrets.USER }}
 
           # EC2 서버 접속 후 Docker 명령 실행
           # 현재 실행 중인 동일한 컨테이너가 있다면 삭제한다.
